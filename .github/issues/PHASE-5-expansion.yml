@@ -1,0 +1,54 @@
+name: "[Phase 5] Ausbau"
+about: "Phase 5: Erweiterte Features und Optimierungen"
+description: |
+  ## Ziele
+  - [ ] Entity-Rendering
+    - [ ] Spieler-Model
+    - [ ] Mob-Models
+    - [ ] Item-Models
+  - [ ] Block-Texturen
+    - [ ] Textur-Loading aus Ressourcenpaketen
+    - [ ] Textur-Atlas
+    - [ ] UV-Mapping
+  - [ ] GUI/HUD-Overlay
+    - [ ] Health/Armor Bar
+    - [ ] Hotbar
+    - [ ] Crosshair
+    - [ ] Debug-Info
+  - [ ] Wetter-Effekte
+    - [ ] Regen
+    - [ ] Schnee
+  - [ ] Performance-Messung
+    - [ ] Frame-Zeit Messung
+    - [ ] Bridge-Latenz Messung
+    - [ ] FPS-Anzeige
+  - [ ] Latenz-Optimierung
+    - [ ] Kompression für große Datenmengen
+    - [ ] LOD (Level of Detail)
+    - [ ] Frustum Culling
+    - [ ] Chunk-Loading Optimierung
+  
+  ## Akzeptanzkriterien
+  - Entities werden korrekt gerendert
+  - Texturen werden aus Ressourcenpaketen geladen
+  - GUI-Elemente werden angezeigt
+  - Wetter-Effekte sind sichtbar
+  - Performance-Metriken werden angezeigt
+  - Frame-Rate > 50 FPS mit allen Features
+  
+  ## Abhängigkeiten
+  - Phase 4 (Grundlegender Renderer)
+  
+  ## Technische Details
+  - **Textur-Loading**: PNG-Dateien aus Ressourcenpaket-Pfaden
+  - **Model-Format**: Einfaches OBJ-Format oder direktes Rendering
+  - **Kompression**: Zstd für Chunk-Daten
+  - **LOD**: Entfernung-basierte Detailreduzierung
+  
+  ## Geschätzter Aufwand
+  - 16-24 Stunden
+  
+  ## Status
+  **GEPLANT** - Wartet auf Abschluss von Phase 4
+labels: ["phase-5", "features", "performance", "enhancement"]
+assignees: ""

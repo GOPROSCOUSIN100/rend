@@ -1,0 +1,36 @@
+name: "[Phase 2] Protokoll-Prototyp"
+about: "Phase 2: Bridge-Protokoll mit Transport, Handshake und Tests"
+description: |
+  ## Ziele
+  - [ ] Binäres Protokoll-Design finalisieren
+  - [ ] Message-Typen definieren (Message-Klassen)
+  - [ ] Serialisierung/Deserialisierung implementieren
+  - [ ] Shared Memory Transport
+  - [ ] Local Socket Transport (Fallback)
+  - [ ] Handshake und Version-Aushandlung
+  - [ ] Heartbeat-Mechanismus
+  - [ ] Roundtrip-Test (Echo)
+  - [ ] Unit-Tests für alle Komponenten
+  
+  ## Akzeptanzkriterien
+  - Protokoll-Modul kompiliert und alle Tests passieren
+  - Transport-Schicht funktioniert mit Shared Memory und Socket
+  - Handshake zwischen zwei Prozessen erfolgreich
+  - Heartbeat hält Verbindung am Leben
+  - Echo-Test zeigt < 1ms Latenz
+  
+  ## Abhängigkeiten
+  - Phase 1 muss abgeschlossen sein
+  
+  ## Technische Details
+  - **Protokoll**: Binär, Big-Endian, Message-Typen wie in ADR-003
+  - **Transport**: Shared Memory (primär) + Local Socket (Fallback)
+  - **Message-Typen**: MSG_HANDSHAKE, MSG_HEARTBEAT, MSG_ACK, MSG_ERROR, MSG_ECHO
+  
+  ## Geschätzter Aufwand
+  - 8-12 Stunden
+  
+  ## Status
+  **GEPLANT** - Wartet auf Abschluss von Phase 1
+labels: ["phase-2", "protocol", "networking", "enhancement"]
+assignees: ""

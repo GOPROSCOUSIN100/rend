@@ -1,0 +1,6 @@
+// Root settings for rend project
+// Multi-module build configuration
+
+include 'bridge-protocol'
+include 'mc-client-mod'
+include 'external-renderer'

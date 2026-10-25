@@ -1,0 +1,62 @@
+// Root build.gradle for rend project
+// Common configuration for all subprojects
+
+buildscript {
+    ext {
+        // Common versions
+        javaVersion = '1.8'
+        
+        // Dependency versions
+        lwjglVersion = '2.9.4'
+        junitVersion = '4.13.2'
+        slf4jVersion = '1.7.36'
+        mixinVersion = '0.8.5'
+    }
+}
+
+allprojects {
+    apply plugin: 'java'
+    
+    group = 'renderbridge'
+    version = '0.1.0-SNAPSHOT'
+    
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    
+    repositories {
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://files.minecraftforge.net/maven' }
+    }
+}
+
+subprojects {
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+    
+    tasks.withType(Javadoc) {
+        options.encoding = 'UTF-8'
+    }
+}
+
+// Configure bridge-protocol module
+project(':bridge-protocol') {
+    description = 'Bridge protocol definitions and transport layer'
+}
+
+// Configure mc-client-mod module
+project(':mc-client-mod') {
+    description = 'Minecraft 1.8.9 Forge client mod'
+}
+
+// Configure external-renderer module
+project(':external-renderer') {
+    description = 'External renderer process'
+    
+    apply plugin: 'application'
+    
+    application {
+        mainClass = 'renderbridge.renderer.Main'
+    }
+}

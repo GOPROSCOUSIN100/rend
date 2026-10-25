@@ -1,0 +1,41 @@
+name: "[Phase 4] Externer Renderer"
+about: "Phase 4: Separates Renderer-Programm mit OpenGL"
+description: |
+  ## Ziele
+  - [ ] LWJGL 2 Fenster erstellen
+  - [ ] OpenGL Kontext initialisieren
+  - [ ] Bridge-Client implementieren
+  - [ ] Szene-Daten empfangen und parsen
+  - [ ] Kamera aus übertragenen Matrizen steuern
+  - [ ] Einfaches Voxel-Mesh rendern
+    - [ ] Chunk-Rendering
+    - [ ] Block-Texturen (einfarbig für Prototyp)
+  - [ ] Frame-Rate Synchronisation
+  - [ ] Fallback-Anzeige (wenn Verbindung verloren)
+  
+  ## Akzeptanzkriterien
+  - Renderer startet und zeigt Fenster
+  - Verbindung zur Bridge erfolgreich
+  - Kamera-Bewegung aus Minecraft wird im Renderer widerspiegelt
+  - Einfache Voxel-Welt wird gerendert
+  - Frame-Rate > 30 FPS
+  
+  ## Abhängigkeiten
+  - Phase 1 (Build-System)
+  - Phase 2 (Protokoll-Modul)
+  - Phase 3 (Client-Mod für Testdaten)
+  
+  ## Technische Details
+  - **LWJGL**: Version 2.9.4 (kompatibel mit Minecraft 1.8.9)
+  - **OpenGL**: Version 2.1 (für maximale Kompatibilität)
+  - **Shaders**: GLSL 1.20
+  - **Rendering**: Immediate Mode oder VBOs
+  - **Fenster**: GLFW oder LWJGL Display
+  
+  ## Geschätzter Aufwand
+  - 10-14 Stunden
+  
+  ## Status
+  **GEPLANT** - Wartet auf Abschluss von Phase 3
+labels: ["phase-4", "renderer", "opengl", "lwjgl", "enhancement"]
+assignees: ""

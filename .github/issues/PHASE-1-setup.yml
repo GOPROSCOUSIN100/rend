@@ -1,0 +1,28 @@
+name: "[Phase 1] Projekt-Setup"
+about: "Phase 1: Repository-Struktur, Dokumentation und Build-Systeme"
+description: |
+  ## Ziele
+  - [x] Repository-Struktur erstellen
+  - [x] README.md mit Architekturüberblick
+  - [x] CONTRIBUTING.md mit Arbeitsablauf
+  - [x] docs/architecture.md - Detaillierte Architektur
+  - [x] docs/adr/ - Architecture Decision Records
+  - [x] Build-Systeme einrichten (Gradle)
+  - [ ] GitHub Issues für alle Phasen erstellen
+  
+  ## Akzeptanzkriterien
+  - Alle Dokumentationsdateien vorhanden
+  - Build-Systeme funktionieren
+  - Verzeichnisstruktur stimmt mit Architektur überein
+  - ADRs dokumentieren alle technischen Entscheidungen
+  
+  ## Abhängigkeiten
+  - Keine
+  
+  ## Geschätzter Aufwand
+  - 4-8 Stunden
+  
+  ## Status
+  **LAUFEND** - Grundstruktur steht, Issues müssen noch erstellt werden
+labels: ["phase-1", "setup", "documentation", "enhancement"]
+assignees: ""

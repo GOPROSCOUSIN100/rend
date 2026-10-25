@@ -1,0 +1,45 @@
+name: "[Phase 3] Client-Mod Datenquelle"
+about: "Phase 3: Forge-Mod mit Render-Pipeline Hooks und Datenextraktion"
+description: |
+  ## Ziele
+  - [ ] Forge-Mod Grundgerüst mit RetroFuturaGradle
+  - [ ] Render-Pipeline Hooks implementieren
+    - [ ] EntityRenderer.updateCameraAndRender
+    - [ ] RenderGlobal.renderEntities
+    - [ ] RenderGlobal.renderBlockLayer
+    - [ ] EffectRenderer.updateEffects
+    - [ ] GuiIngame.renderGameOverlay
+  - [ ] Daten-Extraktoren implementieren
+    - [ ] CameraExtractor
+    - [ ] ChunkExtractor
+    - [ ] EntityExtractor
+    - [ ] ParticleExtractor
+    - [ ] WeatherExtractor
+  - [ ] Bridge-Integration (Verbindung zu Transport)
+  - [ ] Fallback-Rendering (wenn Bridge offline)
+  - [ ] Konfiguration (Aktivieren/Deaktivieren)
+  
+  ## Akzeptanzkriterien
+  - Mod kompiliert und läuft in Minecraft 1.8.9
+  - Kamera-Daten werden korrekt extrahiert
+  - Chunk-Daten werden extrahiert und serialisiert
+  - Fallback-Rendering zeigt Status an
+  - Verbindung zur Bridge funktioniert
+  
+  ## Abhängigkeiten
+  - Phase 1 (Build-System)
+  - Phase 2 (Protokoll-Modul)
+  
+  ## Technische Details
+  - **Forge-Version**: 1.8.9-11.15.1.2318-1.8.9
+  - **Mappings**: stable_22 (MCP 9.10)
+  - **Hook-Methode**: Forge Events + Mixin (ADR-001)
+  - **Abhängigkeit**: bridge-protocol Modul
+  
+  ## Geschätzter Aufwand
+  - 12-16 Stunden
+  
+  ## Status
+  **GEPLANT** - Wartet auf Abschluss von Phase 2
+labels: ["phase-3", "minecraft-mod", "forge", "enhancement"]
+assignees: ""

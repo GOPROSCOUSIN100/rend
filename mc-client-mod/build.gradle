@@ -1,0 +1,105 @@
+// build.gradle for mc-client-mod
+// Minecraft 1.8.9 Forge mod using RetroFuturaGradle
+
+buildscript {
+    repositories {
+        maven { url 'https://files.minecraftforge.net/maven' }
+        jcenter()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        classpath 'com.retrofutura.gradle:retrofuturagradle:1.0.0'
+    }
+}
+
+apply plugin: 'com.retrofutura.mcp'
+apply plugin: 'java'
+
+// MCP configuration for Minecraft 1.8.9
+mcp {
+    mappings 'stable_22' // MCP 9.10 mappings for 1.8.9
+    
+    forge {
+        version '1.8.9-11.15.1.2318-1.8.9'
+        mappings 'stable_22'
+    }
+    
+    accessTransformer = file('src/main/resources/renderbridge_at.cfg')
+}
+
+dependencies {
+    // Forge dependencies (provided at runtime)
+    compileOnly 'net.minecraftforge:forge:1.8.9-11.15.1.2318-1.8.9'
+    
+    // Bridge protocol dependency
+    implementation project(':bridge-protocol')
+    
+    // Mixin for deep hooks
+    implementation "org.spongepowered:mixin:${mixinVersion}"
+    
+    // Logging
+    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+}
+
+// Mod configuration
+minecraft {
+    version = '1.8.9-11.15.1.2318-1.8.9'
+    mappings = 'stable_22'
+    
+    // Mod metadata
+    mod {
+        id = 'renderbridge'
+        name = 'RenderBridge'
+        version = project.version
+        description = 'External renderer bridge for Minecraft 1.8.9'
+        authors = ['GOPROSCOUSIN100']
+        url = 'https://github.com/GOPROSCOUSIN100/rend'
+        credits = ''
+        logoFile = ''
+        screenshots = []
+        dependencies = []
+    }
+}
+
+// Build configuration
+jar {
+    archiveBaseName = 'renderbridge-mod'
+    archiveClassifier = ''
+    archiveVersion = project.version
+    
+    // Include mod metadata
+    from sourceSets.main.output
+    
+    manifest {
+        attributes(
+            'Implementation-Title': 'RenderBridge Mod',
+            'Implementation-Version': project.version,
+            'Implementation-Vendor': 'GOPROSCOUSIN100',
+            'FMLCorePlugin': 'renderbridge.core.RenderBridgeCorePlugin',
+            'FMLCorePluginContainsFMLMod': 'true',
+            'FMLModType': 'FML'
+        )
+    }
+    
+    // Exclude unnecessary files
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+}
+
+// Source sets
+sourceSets {
+    main {
+        resources {
+            srcDir 'src/main/resources'
+            exclude '**/*.cfg'
+        }
+    }
+}
+
+test {
+    useJUnit()
+    
+    // Exclude MCP classes from test classpath
+    exclude group: 'net.minecraftforge', module: 'forge'
+    exclude group: 'net.minecraft', module: 'launchwrapper'
+}

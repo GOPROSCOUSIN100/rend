@@ -1,0 +1,32 @@
+// build.gradle for bridge-protocol module
+// Pure Java library with no external dependencies
+
+plugins {
+    id 'java'
+}
+
+dependencies {
+    // No external dependencies for core protocol
+    // This module should be self-contained
+    
+    testImplementation "junit:junit:${junitVersion}"
+    testImplementation "org.hamcrest:hamcrest-core:1.3"
+}
+
+test {
+    useJUnit()
+}
+
+jar {
+    archiveBaseName = 'bridge-protocol'
+    archiveClassifier = ''
+    archiveVersion = project.version
+    
+    manifest {
+        attributes(
+            'Implementation-Title': 'RenderBridge Protocol',
+            'Implementation-Version': project.version,
+            'Implementation-Vendor': 'GOPROSCOUSIN100'
+        )
+    }
+}

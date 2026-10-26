@@ -1,0 +1,51 @@
+# C++ Renderer Git Ignore
+
+# Build directories
+build/
+bin/
+lib/
+CMakeFiles/
+CMakeCache.txt
+
+# IDE directories
+.idea/
+.vs/
+*.swp
+*.swo
+*~
+
+# Compiled binaries
+external-renderer-cpp
+renderer
+renderbridge-renderer
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+
+# Shader compilation outputs
+shaders/*.bin
+
+# bgfx build outputs
+3rdparty/bgfx/.libs/
+3rdparty/bgfx/lib/
+3rdparty/bgfx/bin/
+
+# GLFW (if built from source)
+3rdparty/glfw/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Log files
+*.log
+
+# Dependency directories (if using vcpkg/conan)
+vcpkg/
+conan/
+
+# OS-specific
+.DS_Store
+Thumbs.db

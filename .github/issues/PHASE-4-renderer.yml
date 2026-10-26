@@ -1,41 +1,143 @@
-name: "[Phase 4] Externer Renderer"
-about: "Phase 4: Separates Renderer-Programm mit OpenGL"
+name: "[Phase 4] Externer Renderer mit bgfx"
+about: "Phase 4: C++/bgfx-basierter externer Renderer"
 description: |
   ## Ziele
-  - [ ] LWJGL 2 Fenster erstellen
-  - [ ] OpenGL Kontext initialisieren
-  - [ ] Bridge-Client implementieren
-  - [ ] Szene-Daten empfangen und parsen
+  
+  ### Kernimplementierung
+  - [ ] C++ Projektstruktur mit CMake erstellen
+  - [ ] bgfx als Git-Submodul einbinden
+  - [ ] GLFW für Fensterverwaltung integrieren
+  - [ ] bgfx initialisieren mit automatischer Backend-Auswahl
+  - [ ] Shader-Pipeline mit shaderc einrichten
+  
+  ### Bridge-Integration
+  - [ ] C++ Bridge-Client implementieren
+  - [ ] Shared Memory Transport (primär)
+  - [ ] Local Socket Transport (Fallback)
+  - [ ] Protokoll-Nachrichten parsen (Handshake, Heartbeat, Camera, Chunk, Entity, Particle, Weather, GUI)
+  - [ ] Verbindung zum Mod herstellen und halten
+  
+  ### Szene-Rendering
+  - [ ] Szene-Klassen portieren (Scene, Camera, Chunk, Entity, ParticleSystem, Weather)
+  - [ ] Vertex/Index-Buffer für Voxel-Rendering
+  - [ ] Einfaches Chunk-Mesh generieren
+  - [ ] Entity-Rendering (einfache Platzhalter)
+  - [ ] Particle-Rendering (Punkt-Sprites oder Quads)
   - [ ] Kamera aus übertragenen Matrizen steuern
-  - [ ] Einfaches Voxel-Mesh rendern
-    - [ ] Chunk-Rendering
-    - [ ] Block-Texturen (einfarbig für Prototyp)
-  - [ ] Frame-Rate Synchronisation
-  - [ ] Fallback-Anzeige (wenn Verbindung verloren)
+  - [ ] Beleuchtung (einfaches directional light)
+  - [ ] Fog-Effekte basierend auf Wetterdaten
+  
+  ### Adapter-Layer
+  - [ ] ProtocolAdapter implementieren
+  - [ ] Bridge-Nachrichten zu bgfx-Typen konvertieren
+  - [ ] Vertex/Index-Buffer erstellen und verwalten
+  - [ ] Texturen laden und verwalten
+  - [ ] Uniforms für Shader setzen
+  
+  ### Shader
+  - [ ] Voxel-Shader (vs_voxel.sc, fs_voxel.sc)
+  - [ ] Entity-Shader (vs_entity.sc, fs_entity.sc)
+  - [ ] Particle-Shader (vs_particle.sc, fs_particle.sc)
+  - [ ] CMake-Regeln für Shader-Kompilierung
+  
+  ### Extras
+  - [ ] Fallback-Anzeige bei Verbindungsverlust
+  - [ ] Debug-Overlay (FPS, Frame-Zeit, Bridge-Status)
+  - [ ] Konfigurierbare Backend-Auswahl (D3D11/12, OpenGL, Vulkan, Metal)
+  - [ ] Fehlerbehandlung und Logging
   
   ## Akzeptanzkriterien
-  - Renderer startet und zeigt Fenster
-  - Verbindung zur Bridge erfolgreich
-  - Kamera-Bewegung aus Minecraft wird im Renderer widerspiegelt
-  - Einfache Voxel-Welt wird gerendert
-  - Frame-Rate > 30 FPS
+  - [ ] Renderer startet und zeigt Fenster
+  - [ ] bgfx initialisiert erfolgreich mit verfügbarem Backend
+  - [ ] Verbindung zur Bridge erfolgreich (Shared Memory oder Socket)
+  - [ ] Kamera-Bewegung aus Minecraft wird im Renderer widerspiegelt
+  - [ ] Voxel-Welt wird gerendert (mindestens 1 Chunk)
+  - [ ] Entities werden als Platzhalter dargestellt
+  - [ ] Partikel werden gerendert
+  - [ ] Frame-Rate > 30 FPS
+  - [ ] Alle bgfx-Backends werden unterstützt (wenn verfügbar)
+  - [ ] Fallback bei fehlendem Backend
   
   ## Abhängigkeiten
   - Phase 1 (Build-System)
   - Phase 2 (Protokoll-Modul)
   - Phase 3 (Client-Mod für Testdaten)
+  - ADR-005 (bgfx-Auswahl)
+  - ADR-006 (GLFW-Auswahl)
+  - THIRD-PARTY-NOTICES.md
   
   ## Technische Details
-  - **LWJGL**: Version 2.9.4 (kompatibel mit Minecraft 1.8.9)
-  - **OpenGL**: Version 2.1 (für maximale Kompatibilität)
-  - **Shaders**: GLSL 1.20
-  - **Rendering**: Immediate Mode oder VBOs
-  - **Fenster**: GLFW oder LWJGL Display
+  
+  ### Build-System
+  - **CMake**: Version 3.15+
+  - **C++ Standard**: C++17
+  - **bgfx**: Git-Submodul (latest stable)
+  - **GLFW**: Version 3.3+
+  
+  ### Rendering
+  - **bgfx Backends**: D3D11, D3D12, OpenGL, Vulkan, Metal (automatische Auswahl)
+  - **Shader Language**: bgfx Shader Language (.sc)
+  - **Vertex Declarations**: bgfx::VertexDecl
+  - **Textures**: bgfx::TextureHandle
+  - **Uniforms**: bgfx::UniformHandle
+  
+  ### Bridge-Integration
+  - **Transport**: Shared Memory (primär), Local Socket (Fallback)
+  - **Protokoll**: Binär, Big-Endian, Message-Typen aus Phase 2
+  - **Nachrichten**: Handshake, Heartbeat, FrameStart/End, Camera, Chunk, Entity, Particle, Weather, GUI
+  
+  ### Projekt-Struktur
+  ```
+  external-renderer-cpp/
+  ├── CMakeLists.txt
+  ├── src/
+  │   ├── main.cpp              # Haupteinstiegspunkt
+  │   ├── main.hpp
+  │   ├── window.hpp/cpp        # Fensterverwaltung
+  │   ├── input_handler.hpp/cpp # Eingabe
+  │   ├── bridge/              # Bridge-Client
+  │   │   ├── renderer_bridge_client.hpp/cpp
+  │   │   ├── bridge_connection.hpp/cpp
+  │   │   └── message_handler.hpp/cpp
+  │   ├── scene/               # Szene-Klassen
+  │   │   ├── scene.hpp/cpp
+  │   │   ├── camera.hpp/cpp
+  │   │   ├── chunk.hpp/cpp
+  │   │   ├── entity.hpp/cpp
+  │   │   ├── particle.hpp/cpp
+  │   │   └── weather.hpp/cpp
+  │   ├── renderer/            # Renderer
+  │   │   ├── renderer.hpp/cpp
+  │   │   ├── voxel_renderer.hpp/cpp
+  │   │   ├── entity_renderer.hpp/cpp
+  │   │   └── particle_renderer.hpp/cpp
+  │   ├── adapter/             # Protokoll-Adapter
+  │   │   └── protocol_adapter.hpp/cpp
+  │   └── utils/               # Hilfsklassen
+  │       ├── byte_buffer.hpp/cpp
+  │       └── logger.hpp/cpp
+  ├── shaders/                # Shader-Dateien
+  │   ├── vs_voxel.sc
+  │   ├── fs_voxel.sc
+  │   ├── vs_entity.sc
+  │   ├── fs_entity.sc
+  │   ├── vs_particle.sc
+  │   └── fs_particle.sc
+  ├── cmake/
+  │   └── Findbgfx.cmake
+  └── 3rdparty/
+      └── bgfx/                # Git-Submodul
+  ```
+  
+  ## Lizenz-Compliance
+  - bgfx: BSD-2-Clause (Git-Submodul, nicht modifiziert)
+  - GLFW: zlib/Libpng License
+  - Alle Lizenzen dokumentiert in THIRD-PARTY-NOTICES.md
   
   ## Geschätzter Aufwand
-  - 10-14 Stunden
+  - 20-30 Stunden
   
   ## Status
-  **GEPLANT** - Wartet auf Abschluss von Phase 3
-labels: ["phase-4", "renderer", "opengl", "lwjgl", "enhancement"]
+  **IN BEARBEITUNG** - bgfx-Integration und C++-Struktur erstellt
+labels: ["phase-4", "renderer", "bgfx", "c++", "cmake", "glfw", "enhancement"]
 assignees: ""

@@ -1,0 +1,3 @@
+[submodule "external-renderer-cpp/3rdparty/bgfx"]
+	path = external-renderer-cpp/3rdparty/bgfx
+	url = https://github.com/bkaradzic/bgfx.git

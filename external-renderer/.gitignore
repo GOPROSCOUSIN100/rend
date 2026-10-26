@@ -39,6 +39,9 @@ shaders/*.bin
 *.tmp
 *.temp
 
+# Source files (tracked)
+!src/
+
 # Log files
 *.log
 
